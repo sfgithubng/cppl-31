@@ -34,8 +34,7 @@ public:
     if (elementNumber < currentElements) {
       return smartArray[elementNumber];
     } else {
-      std::cout << "Invalid element number requested, returning 0" << std::endl;
-      return 0;
+      throw std::invalid_argument("Invalid element number requested");
     }
   }
 
