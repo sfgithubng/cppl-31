@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdint>
 
 class smart_array {
 private:
@@ -30,7 +31,7 @@ public:
     smartArray[currentElements - 1] = elementToAdd;
   }
 
-  int32_t get_element(u_int32_t elementNumber) {
+  int32_t get_element(uint32_t elementNumber) {
     if (elementNumber < currentElements) {
       return smartArray[elementNumber];
     } else {
