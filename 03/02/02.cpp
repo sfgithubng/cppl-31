@@ -50,10 +50,18 @@ public:
   }
 
   smart_array& operator=(const smart_array& otherSmartArray) {
+    if (this == &otherSmartArray) {
+      return *this;
+    }
+
+    currentElements = otherSmartArray.currentElements;
+    maxElements = otherSmartArray.maxElements;
+    delete[] smartArray;
     smartArray = new int[maxElements];
     for (int arrIndex = 0; arrIndex < currentElements; arrIndex++) {
       smartArray[arrIndex] = otherSmartArray.smartArray[arrIndex];
     }
+
     return *this;
   }
 
