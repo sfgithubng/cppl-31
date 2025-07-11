@@ -2,16 +2,15 @@
 #include <vector>
 
 template<typename T>
-void universalPrint(T);
+T universalPow2(T);
 
 template<>
-void universalPrint<int>(int intToPrint) {
-  std::cout << "[IN]: " << intToPrint << std::endl;
-  std::cout << "[OUT]: " << intToPrint * intToPrint << std::endl;
+int universalPow2<int>(int intToPrint) {
+  return intToPrint * intToPrint;
 }
 
 template<>
-void universalPrint<std::vector<int>>(std::vector<int> intVectorToPrint) {
+std::vector<int> universalPow2<std::vector<int>>(std::vector<int> intVectorToPrint) {
   std::cout << "[IN]: ";
   std::string inValuesToPrint;
   for (auto intToPrint : intVectorToPrint) {
@@ -31,10 +30,27 @@ void universalPrint<std::vector<int>>(std::vector<int> intVectorToPrint) {
 
 int main() {
   int input1{4};
-  universalPrint(input1);
+  auto output1 = universalPow2(input1);
+  std::cout << "[IN]: " << input1 << std::endl;
+  std::cout << "[OUT]: " << output1 << std::endl;
 
   std::vector<int> input2{-1, 4, 8};
-  universalPrint(input2);
+  auto output2 = universalPow2(input2);
+  std::cout << "[IN]: ";
+  std::string inValuesToPrint;
+  for (auto intToPrint : input2) {
+    inValuesToPrint += std::to_string(intToPrint) + ", ";
+  }
+  inValuesToPrint.erase(inValuesToPrint.size() - 2);
+  std::cout << inValuesToPrint << std::endl;
+
+  std::cout << "[OUT]: ";
+  std::string outValuesToPrint;
+  for (auto intToPrint : output2) {
+    outValuesToPrint += std::to_string(intToPrint * intToPrint) + ", ";
+  }
+  outValuesToPrint.erase(outValuesToPrint.size() - 2);
+  std::cout << outValuesToPrint << std::endl;
 
   return EXIT_SUCCESS;
 }
