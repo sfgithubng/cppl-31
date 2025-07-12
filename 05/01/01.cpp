@@ -2,30 +2,30 @@
 #include <vector>
 
 template<typename T>
-T universalPow2(T);
+T universalPow2(const T&);
 
 template<>
-int universalPow2<int>(int intToPrint) {
-  return intToPrint * intToPrint;
+int universalPow2<int>(const int& inputInt) {
+  return inputInt * inputInt;
 }
 
 template<>
-std::vector<int> universalPow2<std::vector<int>>(std::vector<int> intVectorToPrint) {
-  std::cout << "[IN]: ";
-  std::string inValuesToPrint;
-  for (auto intToPrint : intVectorToPrint) {
-    inValuesToPrint += std::to_string(intToPrint) + ", ";
+std::vector<int> universalPow2<std::vector<int>>(const std::vector<int>& inputIntVector) {
+  std::vector<int> outputIntVector {};
+  for (auto inputIntValue : inputIntVector) {
+    outputIntVector.push_back(inputIntValue * inputIntValue);
   }
-  inValuesToPrint.erase(inValuesToPrint.size() - 2);
-  std::cout << inValuesToPrint << std::endl;
 
-  std::cout << "[OUT]: ";
-  std::string outValuesToPrint;
+  return outputIntVector;
+}
+
+void printIntVectorCommaSeparated(const std::vector<int>& intVectorToPrint) {
+  std::string stringToPrint;
   for (auto intToPrint : intVectorToPrint) {
-    outValuesToPrint += std::to_string(intToPrint * intToPrint) + ", ";
+    stringToPrint += std::to_string(intToPrint) + ", ";
   }
-  outValuesToPrint.erase(outValuesToPrint.size() - 2);
-  std::cout << outValuesToPrint << std::endl;
+  stringToPrint.erase(stringToPrint.size() - 2);
+  std::cout << stringToPrint << std::endl;
 }
 
 int main() {
@@ -37,20 +37,9 @@ int main() {
   std::vector<int> input2{-1, 4, 8};
   auto output2 = universalPow2(input2);
   std::cout << "[IN]: ";
-  std::string inValuesToPrint;
-  for (auto intToPrint : input2) {
-    inValuesToPrint += std::to_string(intToPrint) + ", ";
-  }
-  inValuesToPrint.erase(inValuesToPrint.size() - 2);
-  std::cout << inValuesToPrint << std::endl;
-
+  printIntVectorCommaSeparated(input2);
   std::cout << "[OUT]: ";
-  std::string outValuesToPrint;
-  for (auto intToPrint : output2) {
-    outValuesToPrint += std::to_string(intToPrint * intToPrint) + ", ";
-  }
-  outValuesToPrint.erase(outValuesToPrint.size() - 2);
-  std::cout << outValuesToPrint << std::endl;
+  printIntVectorCommaSeparated(output2);
 
   return EXIT_SUCCESS;
 }
