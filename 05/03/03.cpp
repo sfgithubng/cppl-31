@@ -4,36 +4,25 @@
 #include <numeric>
 #include <vector>
 
-class get_sum {
+class Counter {
 private:
   int32_t sumValue;
+  int32_t countValue;
 public:
-  explicit get_sum() : sumValue{0} {}
+  explicit Counter() : countValue{0}, sumValue{0} {}
 
   void operator()(int32_t mod3Candidate) {
     if ((mod3Candidate % 3) == 0) {
       sumValue += mod3Candidate;
+      countValue++;
     }
   }
 
-  operator int32_t() {
+  int32_t get_sum() const {
     return sumValue;
   }
-};
 
-class get_count {
-private:
-  int32_t countValue;
-public:
-  explicit get_count() : countValue{0} {}
-
-  void operator()(int32_t mod3Candidate) {
-    if ((mod3Candidate % 3) == 0) {
-      ++countValue;
-    }
-  }
-
-  operator int32_t() {
+  int32_t get_count() const {
     return countValue;
   }
 };
@@ -46,11 +35,9 @@ int main() {
   }
   std::cout << std::endl;
 
-  int32_t testSum = std::for_each(intsToCalc.begin(), intsToCalc.end(), get_sum());
-  std::cout << "[OUT]: get_sum() = " << testSum << std::endl;
-
-  int32_t testCount = std::for_each(intsToCalc.begin(), intsToCalc.end(), get_count());
-  std::cout << "[OUT]: get_count() = " << testCount << std::endl;
+  Counter counter = std::for_each(intsToCalc.begin(), intsToCalc.end(), Counter());
+  std::cout << "[OUT]: get_sum() = " << counter.get_sum() << std::endl;
+  std::cout << "[OUT]: get_count() = " << counter.get_count() << std::endl;
 
   return EXIT_SUCCESS;
 }
